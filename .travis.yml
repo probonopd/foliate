@@ -11,6 +11,30 @@ install:
   - sudo apt-get -y install python3.6-venv libwebkit2gtk-4.0 libsoup2.4
 
 script:
+  # Autoconf
+  - wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz 
+  - tar xf autoconf*
+  - cd autoconf-*/
+  - sh configure --prefix /usr
+  - make -j$(nproc)
+  - sudo make install
+  - cd -
+  # Automake
+  - wget http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz
+  - tar xf automake*
+  - cd automake-*/
+  - sh configure --prefix /usr
+  - make -j$(nproc)
+  - sudo make install
+  - cd -
+  # Libtool
+  - wget http://mirror.jre655.com/GNU/libtool/libtool-2.4.6.tar.gz
+  - tar xf libtool*
+  - cd libtool-*/
+  - sh configure --prefix /usr
+  - make -j$(nproc)
+  - sudo make install 
+  - cd -
   # https://github.com/GNOME/gjs
   - git clone https://github.com/GNOME/gjs
   - cd gjs
