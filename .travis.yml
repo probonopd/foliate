@@ -12,7 +12,7 @@ install:
 
 script:
   # Autoconf
-  - wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz 
+  - wget http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz
   - tar xf autoconf*
   - cd autoconf-*/
   - sh configure --prefix /usr
@@ -20,7 +20,7 @@ script:
   - sudo make install
   - cd -
   # Automake
-  - wget http://ftp.gnu.org/gnu/automake/automake-1.15.tar.gz
+  - wget http://ftp.gnu.org/gnu/automake/automake-1.16.1.tar.gz
   - tar xf automake*
   - cd automake-*/
   - sh configure --prefix /usr
@@ -28,7 +28,7 @@ script:
   - sudo make install
   - cd -
   # Libtool
-  - wget http://mirror.jre655.com/GNU/libtool/libtool-2.4.6.tar.gz
+  - wget http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.gz
   - tar xf libtool*
   - cd libtool-*/
   - sh configure --prefix /usr
