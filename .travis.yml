@@ -8,7 +8,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get -y install python3.6-venv libwebkit2gtk-4.0 libsoup2.4
+  - sudo apt-get -y install python3.6-venv libwebkit2gtk-4.0 libsoup2.4 pkg-config
 
 script:
   # Autoconf
