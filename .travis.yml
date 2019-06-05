@@ -1,0 +1,40 @@
+language: cpp
+compiler: gcc
+sudo: require
+dist: xenial
+
+before_install:
+  - sudo add-apt-repository ppa:deadsnakes/ppa -y # Newer Python for Meson
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get -y install python3.6-venv libwebkit2gtk-4.0 libsoup2.4
+
+script:
+  # https://github.com/GNOME/gjs
+  - git clone https://github.com/GNOME/gjs
+  - cd gjs
+  - ./autogen.sh
+  - make
+  - sudo make install
+  - cd ..
+  # Install Meson "manually"
+  - virtualenv -p python3 ./ # Create virtualenv
+  - source bin/activate      # Activate the virtualenv
+  - pip3 install meson       # Install Meson
+  - hash -r                  # Refresh bash paths
+  - cd ..
+  # Install Ninja "manually"
+  - git clone git://github.com/ninja-build/ninja.git
+  - cd ninja
+  - git checkout release
+  - ./configure.py --bootstrap
+  - mkdir -p ../bin
+  - cp ninja ../bin
+  - BINDIR=$(readlink -f ../bin)
+  - cd ..
+  # foliate
+  - meson . build --prefix /usr
+  - ninja -C build
+  - sudo ninja -C build install
+  - cd ..
